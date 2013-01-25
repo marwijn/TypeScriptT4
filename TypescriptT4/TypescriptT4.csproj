@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Noesis.Javascript">
+      <HintPath>..\..\..\..\Users\MaMo\Documents\Visual Studio 2012\Projects\T4Typescript\T4TypeScriptCompiler\extlibs\Noesis.Javascript v0.7 - Binaries\.Net4.0\x86\Noesis.Javascript.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,43 +46,120 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="compiler\ast.ts" />
-    <Content Include="compiler\astLogger.ts" />
-    <Content Include="compiler\astPath.ts" />
-    <Content Include="compiler\astWalker.ts" />
-    <Content Include="compiler\astWalkerCallback.ts" />
-    <Content Include="compiler\base64.ts" />
-    <Content Include="compiler\binder.ts" />
-    <Content Include="compiler\declarationEmitter.ts" />
-    <Content Include="compiler\diagnostics.ts" />
-    <Content Include="compiler\emitter.ts" />
-    <Content Include="compiler\errorReporter.ts" />
-    <Content Include="compiler\flags.ts" />
-    <Content Include="compiler\hashTable.ts" />
-    <Content Include="compiler\incrementalParser.ts" />
-    <Content Include="compiler\io.ts" />
-    <Content Include="compiler\nodeTypes.ts" />
-    <Content Include="compiler\optionsParser.ts" />
-    <Content Include="compiler\parser.ts" />
-    <Content Include="compiler\pathUtils.ts" />
-    <Content Include="compiler\precompile.ts" />
-    <Content Include="compiler\printContext.ts" />
-    <Content Include="compiler\referenceResolution.ts" />
-    <Content Include="compiler\scanner.ts" />
-    <Content Include="compiler\scopeAssignment.ts" />
-    <Content Include="compiler\scopeWalk.ts" />
-    <Content Include="compiler\signatures.ts" />
-    <Content Include="compiler\sourceMapping.ts" />
-    <Content Include="compiler\symbols.ts" />
-    <Content Include="compiler\symbolScope.ts" />
-    <Content Include="compiler\tokens.ts" />
-    <Content Include="compiler\tsc.ts" />
-    <Content Include="compiler\typeChecker.ts" />
-    <Content Include="compiler\typeCollection.ts" />
-    <Content Include="compiler\typeFlow.ts" />
-    <Content Include="compiler\types.ts" />
-    <Content Include="compiler\typescript.ts" />
-    <Content Include="compiler\walkContext.ts" />
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\ast.ts">
+      <Link>compiler\ast.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\astLogger.ts">
+      <Link>compiler\astLogger.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\astPath.ts">
+      <Link>compiler\astPath.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\astWalker.ts">
+      <Link>compiler\astWalker.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\astWalkerCallback.ts">
+      <Link>compiler\astWalkerCallback.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\base64.ts">
+      <Link>compiler\base64.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\binder.ts">
+      <Link>compiler\binder.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\declarationEmitter.ts">
+      <Link>compiler\declarationEmitter.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\diagnostics.ts">
+      <Link>compiler\diagnostics.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\emitter.ts">
+      <Link>compiler\emitter.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\errorReporter.ts">
+      <Link>compiler\errorReporter.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\flags.ts">
+      <Link>compiler\flags.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\hashTable.ts">
+      <Link>compiler\hashTable.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\incrementalParser.ts">
+      <Link>compiler\incrementalParser.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\io.ts">
+      <Link>compiler\io.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\nodeTypes.ts">
+      <Link>compiler\nodeTypes.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\optionsParser.ts">
+      <Link>compiler\optionsParser.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\parser.ts">
+      <Link>compiler\parser.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\pathUtils.ts">
+      <Link>compiler\pathUtils.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\precompile.ts">
+      <Link>compiler\precompile.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\printContext.ts">
+      <Link>compiler\printContext.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\referenceResolution.ts">
+      <Link>compiler\referenceResolution.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\scanner.ts">
+      <Link>compiler\scanner.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\scopeAssignment.ts">
+      <Link>compiler\scopeAssignment.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\scopeWalk.ts">
+      <Link>compiler\scopeWalk.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\signatures.ts">
+      <Link>compiler\signatures.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\sourceMapping.ts">
+      <Link>compiler\sourceMapping.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\symbols.ts">
+      <Link>compiler\symbols.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\symbolScope.ts">
+      <Link>compiler\symbolScope.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\tokens.ts">
+      <Link>compiler\tokens.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\tsc.ts">
+      <Link>compiler\tsc.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\typeChecker.ts">
+      <Link>compiler\typeChecker.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\typeCollection.ts">
+      <Link>compiler\typeCollection.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\typeFlow.ts">
+      <Link>compiler\typeFlow.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\types.ts">
+      <Link>compiler\types.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\typescript.ts">
+      <Link>compiler\typescript.ts</Link>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="..\typescriptcompiler\src\compiler\walkContext.ts">
+      <Link>compiler\walkContext.ts</Link>
+    </TypeScriptCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="compilerjs\" />
   </ItemGroup>
   <ItemDefinitionGroup>
     <CustomBuildStep>
@@ -91,14 +172,22 @@
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptSourceMap> --sourcemap</TypeScriptSourceMap>
+  </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
-  <Target Name="BeforeBuild" Inputs="$(SolutionDir)\typescriptcompiler\src\compiler\*.ts" Outputs="$(SolutionDir)\typescriptcompiler\bin\tsc.js')">
+  <Target Name="BeforeBuild">
+    <Message Text="Compiling TypeScript files" />
+    <Message Text="Executing tsc$(TypeScriptSourceMap) @(TypeScriptCompile ->'&quot;%(fullpath)&quot;', ' ')" />
+    <Exec Command="tsc$(TypeScriptSourceMap) -out $(ProjectDir)\compilerjs\tsc.js @(TypeScriptCompile ->'&quot;%(fullpath)&quot;', ' ')" />
+  </Target>
+  <!--Target Name="BeforeBuild" Inputs="$(SolutionDir)\typescriptcompiler\src\compiler\*.ts" Outputs="$(SolutionDir)\typescriptcompiler\bin\tsc.js')">
     <Exec WorkingDirectory="$(SolutionDir)" Command="&quot;$(SolutionDir)\buildcompiler.bat&quot;">
     </Exec>
-  </Target>
+  </Target -->
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="AfterBuild">
