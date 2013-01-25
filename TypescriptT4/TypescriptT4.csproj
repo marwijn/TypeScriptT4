@@ -41,16 +41,68 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="compiler\ast.ts" />
+    <Content Include="compiler\astLogger.ts" />
+    <Content Include="compiler\astPath.ts" />
+    <Content Include="compiler\astWalker.ts" />
+    <Content Include="compiler\astWalkerCallback.ts" />
+    <Content Include="compiler\base64.ts" />
+    <Content Include="compiler\binder.ts" />
+    <Content Include="compiler\declarationEmitter.ts" />
+    <Content Include="compiler\diagnostics.ts" />
+    <Content Include="compiler\emitter.ts" />
+    <Content Include="compiler\errorReporter.ts" />
+    <Content Include="compiler\flags.ts" />
+    <Content Include="compiler\hashTable.ts" />
+    <Content Include="compiler\incrementalParser.ts" />
+    <Content Include="compiler\io.ts" />
+    <Content Include="compiler\nodeTypes.ts" />
+    <Content Include="compiler\optionsParser.ts" />
+    <Content Include="compiler\parser.ts" />
+    <Content Include="compiler\pathUtils.ts" />
+    <Content Include="compiler\precompile.ts" />
+    <Content Include="compiler\printContext.ts" />
+    <Content Include="compiler\referenceResolution.ts" />
+    <Content Include="compiler\scanner.ts" />
+    <Content Include="compiler\scopeAssignment.ts" />
+    <Content Include="compiler\scopeWalk.ts" />
+    <Content Include="compiler\signatures.ts" />
+    <Content Include="compiler\sourceMapping.ts" />
+    <Content Include="compiler\symbols.ts" />
+    <Content Include="compiler\symbolScope.ts" />
+    <Content Include="compiler\tokens.ts" />
+    <Content Include="compiler\tsc.ts" />
+    <Content Include="compiler\typeChecker.ts" />
+    <Content Include="compiler\typeCollection.ts" />
+    <Content Include="compiler\typeFlow.ts" />
+    <Content Include="compiler\types.ts" />
+    <Content Include="compiler\typescript.ts" />
+    <Content Include="compiler\walkContext.ts" />
+  </ItemGroup>
+  <ItemDefinitionGroup>
+    <CustomBuildStep>
+      <Command>
+      cd  "$(SolutionDir)\typescriptcompiler"
+      "$(DevEnvDir)\..\..\VC\bin\NMAKE.exe" clean compiler
+      </Command>
+      <Outputs>$(SolutionDir)\typescriptcompiler\bin\tsc.js</Outputs>
+      <Inputs>$(SolutionDir)\typescriptcompiler\src\compiler\io.ts</Inputs>
+    </CustomBuildStep>
+  </ItemDefinitionGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>cd  "$(SolutionDir)\typescriptcompiler"
-"$(DevEnvDir)\..\..\VC\bin\NMAKE.exe" compiler</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
+  <Target Name="BeforeBuild" Inputs="$(SolutionDir)\typescriptcompiler\src\compiler\*.ts" Outputs="$(SolutionDir)\typescriptcompiler\bin\tsc.js')">
+    <Exec WorkingDirectory="$(SolutionDir)" Command="&quot;$(SolutionDir)\buildcompiler.bat&quot;">
+    </Exec>
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
   <Target Name="AfterBuild">
   </Target>
+  
   -->
 </Project>
