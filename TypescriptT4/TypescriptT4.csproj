@@ -160,7 +160,11 @@
       <Link>compiler\walkContext.ts</Link>
     </TypeScriptCompile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="..\typescriptcompiler\built\local\lib.d.ts">
+      <Link>compilerjs\lib.d.ts</Link>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="compilerjs\tsc.js" />
   </ItemGroup>

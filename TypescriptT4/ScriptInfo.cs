@@ -1,10 +1,14 @@
-﻿using System.IO;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 using Noesis.Javascript;
 
 namespace TypescriptT4
 {
     public class ScriptInfo
     {
+        Bridge bridge;
+
         public void RunCompiler()
         {
 
@@ -15,13 +19,17 @@ namespace TypescriptT4
                 script = streamReader.ReadToEnd();
             }
 
+            bridge = new Bridge();
             using (var context = new JavascriptContext())
             {
-                var bridge = new Bridge();
-
                 context.SetParameter("bridge", bridge);
                 context.Run(script);
             }
+        }
+
+        public IList<TsClassInfo> GetClasses()
+        {
+            return bridge.TsClasses;
         }
     }
 }
