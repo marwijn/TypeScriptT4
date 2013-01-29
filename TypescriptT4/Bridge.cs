@@ -20,14 +20,24 @@ namespace TypescriptT4
         }
     }
 
+    public class TsArgument
+    {
+        public string Name { get; set; }
+        public string Type { get; set; } 
+    }
+
     public class TsMethodInfo
     {
         public string Name { get; private set; }
+        public IList<TsArgument> Arguments { get; private set; } 
+
 
         public TsMethodInfo(string name)
         {
             Name = name;
+            Arguments = new List<TsArgument>();
         }
+
     }
 
     public class Bridge
@@ -39,6 +49,7 @@ namespace TypescriptT4
 
         private string _currentModule;
         private TsClassInfo _currentClass;
+        private TsMethodInfo _currentMethod;
 
         public string SourceFile { get; set; }
 
@@ -108,18 +119,22 @@ namespace TypescriptT4
 
         public void StartClass(string className)
         {
+            if (_currentClass != null) throw new Exception("Start class inside a class");
             _currentClass = new TsClassInfo(className, _currentModule);
             TsClasses.Add(_currentClass);
         }
 
         public void EndClass()
         {
+            if (_currentClass == null) throw new Exception("End class while not in a class");
             _currentClass = null;
         }
 
         public void StartFunction (string functionName)
         {
+            if (_currentMethod != null) throw new Exception("Start function inside a function");
             var method = new TsMethodInfo(functionName);
+            _currentMethod = method;
             if (_currentClass != null)
             {
                 _currentClass.Methods.Add(method);
@@ -127,14 +142,46 @@ namespace TypescriptT4
             TsMethods.Add(method);
         }
 
+        public void EndFunction()
+        {
+            if (_currentMethod == null) throw new Exception("End function without a start");
+            _currentMethod = null;
+        }
+
         public void StartModule(string moduleName)
         {
+            if (_currentModule != null) throw new Exception("Start module inside a module");
             _currentModule = moduleName;
         }
 
         public void EndModule()
         {
+            if (_currentModule == null) throw new Exception("End module without a start");
             _currentModule = null;
+        }
+
+        public void StartConstructor()
+        {
+            StartFunction("constructor");
+        }
+
+        public void EndConstructor()
+        {
+            EndFunction();
+        }
+
+
+        public void AddArgument(string name, string type)
+        {
+            if (_currentMethod == null) throw new Exception("Add argument while not in a method");
+            _currentMethod.Arguments.Add(new TsArgument{Name = name,Type = type});
+        }
+
+        public void CompileCompleted()
+        {
+            if (_currentClass != null) throw new Exception("Class not closed");
+            if (_currentMethod != null) throw new Exception("Method not closed");
+            if (_currentModule != null) throw new Exception("Module not closed");
         }
     }
 }

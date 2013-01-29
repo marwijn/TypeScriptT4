@@ -20964,6 +20964,7 @@ var TypeScript;
                 this.declFile.Write(": ");
                 this.emitTypeSignature(argDecl.type);
             }
+            bridge.AddArgument(argDecl.id.text, argDecl.type.getTypeName());
         };
         DeclarationEmitter.prototype.FuncDeclCallback = function (pre, funcDecl) {
             if(!pre) {
@@ -21002,6 +21003,7 @@ var TypeScript;
             if(funcDecl.isConstructor) {
                 this.emitIndent();
                 this.declFile.Write("constructor");
+                bridge.StartConstructor();
             } else {
                 var id = funcDecl.getNameText();
                 bridge.StartFunction(id);
@@ -21060,6 +21062,7 @@ var TypeScript;
                 this.declFile.Write(": ");
                 this.emitTypeSignature(funcDecl.signature.returnType.type);
             }
+            bridge.EndFunction();
             this.declFile.WriteLine(";");
             return false;
         };

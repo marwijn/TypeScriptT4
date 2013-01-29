@@ -26,6 +26,7 @@ namespace TypescriptT4
                 context.SetParameter("bridge", bridge);
                 context.Run(script);
             }
+            bridge.CompileCompleted();
         }
 
         public IList<TsClassInfo> GetClasses()

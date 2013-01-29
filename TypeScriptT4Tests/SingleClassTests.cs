@@ -5,7 +5,7 @@ using System.Linq;
 namespace TypeScriptT4Tests
 {
     [TestFixture]
-    public class ScriptInfoTests
+    public class SingleClassTests
     {
         private ScriptInfo scriptInfo;
 
@@ -25,7 +25,7 @@ namespace TypeScriptT4Tests
         [Test]
         public void GetMethodsWillReturnTheMethod()
         {
-            Assert.AreEqual("function1", scriptInfo.GetClasses().Single().Methods.First().Name);
+            Assert.AreEqual("function1", scriptInfo.GetClasses().Single().Methods.Single(m => m.Name == "function1").Name);
         }
 
         [Test]
@@ -34,5 +34,12 @@ namespace TypeScriptT4Tests
             Assert.AreEqual("Module2.Module1", scriptInfo.GetClasses().Single().ModuleName);
         }
 
+        [Test]
+        public void ArgumentsForFunction()
+        {
+            Assert.AreEqual("parameter1", scriptInfo.GetClasses().Single().Methods.Single(m=>m.Name=="function1").Arguments.Single().Name);
+        }
+
+        
     }
 }
