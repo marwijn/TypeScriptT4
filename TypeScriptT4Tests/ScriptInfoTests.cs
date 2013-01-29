@@ -7,12 +7,32 @@ namespace TypeScriptT4Tests
     [TestFixture]
     public class ScriptInfoTests
     {
-        [Test]
-        public void GetClassesWillReturnTheClasses()
+        private ScriptInfo scriptInfo;
+
+        [TestFixtureSetUp]
+        public void Setup()
         {
-            var scriptInfo = new ScriptInfo();
-            scriptInfo.RunCompiler();
-            CollectionAssert.AreEquivalent(new [] {"Point"}, scriptInfo.GetClasses().Select(c => c.Name));
+            scriptInfo = new ScriptInfo();
+            scriptInfo.RunCompiler("SingleClass.ts");
         }
+
+        [Test]
+        public void GetClassesWillReturnTheClass()
+        {
+            Assert.AreEqual("Class1", scriptInfo.GetClasses().Single().Name);
+        }
+
+        [Test]
+        public void GetMethodsWillReturnTheMethod()
+        {
+            Assert.AreEqual("function1", scriptInfo.GetClasses().Single().Methods.First().Name);
+        }
+
+        [Test]
+        public void ModuleNameWillContainTheModuleName()
+        {
+            Assert.AreEqual("Module1", scriptInfo.GetClasses().Single().ModuleName);
+        }
+
     }
 }

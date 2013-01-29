@@ -9,7 +9,7 @@ namespace TypescriptT4
     {
         Bridge bridge;
 
-        public void RunCompiler()
+        public void RunCompiler(string fileName)
         {
 
             string script;
@@ -20,6 +20,7 @@ namespace TypescriptT4
             }
 
             bridge = new Bridge();
+            bridge.SourceFile = fileName;
             using (var context = new JavascriptContext())
             {
                 context.SetParameter("bridge", bridge);

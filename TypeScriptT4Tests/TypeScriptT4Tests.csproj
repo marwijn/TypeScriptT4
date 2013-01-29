@@ -56,7 +56,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Test.ts">
+    <None Include="SingleClass.ts">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 
 namespace TypescriptT4
 {
@@ -8,7 +9,22 @@ namespace TypescriptT4
     {
         public string Name { get; private set; }
 
-        public TsClassInfo(string name)
+        public string ModuleName { get; private set; }
+
+        public IList<TsMethodInfo> Methods = new List<TsMethodInfo>(); 
+
+        public TsClassInfo(string name, string moduleName)
+        {
+            Name = name;
+            ModuleName = moduleName;
+        }
+    }
+
+    public class TsMethodInfo
+    {
+        public string Name { get; private set; }
+
+        public TsMethodInfo(string name)
         {
             Name = name;
         }
@@ -17,6 +33,14 @@ namespace TypescriptT4
     public class Bridge
     {
         public IList<TsClassInfo> TsClasses = new List<TsClassInfo>();
+        public IList<TsMethodInfo> TsMethods = new List<TsMethodInfo>();
+
+
+
+        private string _currentModule;
+        private TsClassInfo _currentClass;
+
+        public string SourceFile { get; set; }
 
         public void Print(object iString)
         {
@@ -82,9 +106,35 @@ namespace TypescriptT4
             Directory.CreateDirectory(path);
         }
 
-        public void AddClass(string className)
+        public void StartClass(string className)
         {
-            TsClasses.Add(new TsClassInfo(className));
+            _currentClass = new TsClassInfo(className, _currentModule);
+            TsClasses.Add(_currentClass);
+        }
+
+        public void EndClass()
+        {
+            _currentClass = null;
+        }
+
+        public void StartFunction (string functionName)
+        {
+            var method = new TsMethodInfo(functionName);
+            if (_currentClass != null)
+            {
+                _currentClass.Methods.Add(method);
+            }
+            TsMethods.Add(method);
+        }
+
+        public void StartModule(string moduleName)
+        {
+            _currentModule = moduleName;
+        }
+
+        public void EndModule()
+        {
+            _currentModule = null;
         }
     }
 }
