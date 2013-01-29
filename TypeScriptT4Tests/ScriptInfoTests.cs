@@ -31,7 +31,7 @@ namespace TypeScriptT4Tests
         [Test]
         public void ModuleNameWillContainTheModuleName()
         {
-            Assert.AreEqual("Module1", scriptInfo.GetClasses().Single().ModuleName);
+            Assert.AreEqual("Module2.Module1", scriptInfo.GetClasses().Single().ModuleName);
         }
 
     }
