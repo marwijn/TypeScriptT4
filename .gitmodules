@@ -1,3 +1,3 @@
 [submodule "typescriptcompiler"]
 	path = typescriptcompiler
-	url = https://git01.codeplex.com/forks/marwijn/typescript
+	url = https://github.com/marwijn/TypeScriptCompiler
