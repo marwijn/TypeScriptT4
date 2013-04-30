@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
@@ -75,19 +76,16 @@ namespace TypescriptT4
                 var resourcePath = fileName.Substring("<ExecutingPath>".Length+1);
                 using (var stream = GetType().Assembly.GetManifestResourceStream("TypescriptT4.compilerjs."+resourcePath ))
                 {
+                    Debug.Assert(stream != null, "stream != null");
                     var streamReader = new StreamReader(stream);
                     var result = streamReader.ReadToEnd();
                     return result;
                 }
             }
-            else
+            using (var streamReader = new StreamReader(fileName))
             {
-                using (var streamReader = new StreamReader(fileName))
-                {
-                    return streamReader.ReadToEnd();
-                }                
+                return streamReader.ReadToEnd();
             }
-
         }
 
         public StreamWriter CreateWriter(string fileName)
@@ -171,10 +169,10 @@ namespace TypescriptT4
         }
 
 
-        public void AddArgument(string name, string type)
+        public void AddArgument(string name, object type)
         {
             if (_currentMethod == null) throw new Exception("Add argument while not in a method");
-            _currentMethod.Arguments.Add(new TsArgument{Name = name,Type = type});
+            _currentMethod.Arguments.Add(new TsArgument{Name = name,Type = type.ToString()});
         }
 
         public void CompileCompleted()

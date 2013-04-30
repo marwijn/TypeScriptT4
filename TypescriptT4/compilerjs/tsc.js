@@ -20159,8 +20159,8 @@ var TypeScript;
             if((argDecl.typeExpr || argDecl.type != this.checker.anyType) && this.canEmitTypeAnnotationSignature(TypeScript.ToDeclFlags(funcDecl.fncFlags))) {
                 this.declFile.Write(": ");
                 this.emitTypeSignature(argDecl.type);
+                bridge.AddArgument(argDecl.id.text, argDecl.type.symbol.fullName());
             }
-            bridge.AddArgument(argDecl.id.text, argDecl.type.getTypeName());
         };
         DeclarationEmitter.prototype.FuncDeclCallback = function (pre, funcDecl) {
             if(!pre) {
