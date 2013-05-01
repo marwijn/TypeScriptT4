@@ -1,5 +1,6 @@
 module Module3 {
     export interface Interface1 {
+        getNumber(input: number): number;
     }
 }
 

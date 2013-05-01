@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using Noesis.Javascript;
 
 namespace TypescriptT4
 {
     public class ScriptInfo
     {
-        Bridge bridge;
+        Bridge _bridge;
 
         public void RunCompiler(string fileName)
         {
@@ -15,23 +16,28 @@ namespace TypescriptT4
             string script;
             using (var stream = GetType().Assembly.GetManifestResourceStream("TypescriptT4.compilerjs.tsc.js"))
             {
+                Debug.Assert(stream != null, "stream != null");
                 var streamReader = new StreamReader(stream);
                 script = streamReader.ReadToEnd();
             }
 
-            bridge = new Bridge();
-            bridge.SourceFile = fileName;
+            _bridge = new Bridge {SourceFile = fileName};
             using (var context = new JavascriptContext())
             {
-                context.SetParameter("bridge", bridge);
+                context.SetParameter("bridge", _bridge);
                 context.Run(script);
             }
-            bridge.CompileCompleted();
+            _bridge.CompileCompleted();
         }
 
-        public IList<TsClassInfo> GetClasses()
+        public IList<TsTypeInfo> GetClasses()
         {
-            return bridge.TsClasses;
+            return _bridge.TsTypes.Where(t => !t.IsInterface).ToList();
+        }
+
+        public IList<TsTypeInfo> GetInterfaces()
+        {
+            return _bridge.TsTypes.Where(t => t.IsInterface).ToList();
         }
     }
 }

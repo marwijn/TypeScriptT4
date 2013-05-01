@@ -20316,7 +20316,7 @@ var TypeScript;
             }
             if(pre) {
                 var className = classDecl.name.text;
-                bridge.StartClass(className);
+                bridge.StartType(className, false);
                 this.emitDeclarationComments(classDecl);
                 this.emitDeclFlags(TypeScript.ToDeclFlags(classDecl.varFlags), "class");
                 this.declFile.Write(className);
@@ -20330,7 +20330,7 @@ var TypeScript;
                 }
             } else {
                 this.indenter.decreaseIndent();
-                bridge.EndClass();
+                bridge.EndType();
                 this.popDeclarationContainer(classDecl);
                 this.emitIndent();
                 this.declFile.WriteLine("}");
@@ -20343,6 +20343,7 @@ var TypeScript;
             }
             if(pre) {
                 var interfaceName = interfaceDecl.name.text;
+                bridge.StartType(interfaceName, true);
                 this.emitDeclarationComments(interfaceDecl);
                 this.emitDeclFlags(TypeScript.ToDeclFlags(interfaceDecl.varFlags), "interface");
                 this.declFile.Write(interfaceName);
@@ -20353,6 +20354,7 @@ var TypeScript;
             } else {
                 this.indenter.decreaseIndent();
                 this.popDeclarationContainer(interfaceDecl);
+                bridge.EndType();
                 this.emitIndent();
                 this.declFile.WriteLine("}");
             }

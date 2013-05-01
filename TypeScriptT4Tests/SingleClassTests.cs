@@ -47,6 +47,11 @@ namespace TypeScriptT4Tests
             Assert.AreEqual("Module3.Interface1", _scriptInfo.GetClasses().Single().Methods.Single(m => m.Name == "constructor").Arguments.Single().Type);
         }
 
-
+        [Test]
+        public void GetInterfacesWillReturnTheInterfaces()
+        {
+            Assert.AreEqual("Interface1", _scriptInfo.GetInterfaces().Single().Name);
+            Assert.AreEqual("Module3", _scriptInfo.GetInterfaces().Single().ModuleName);
+        }
     }
 }

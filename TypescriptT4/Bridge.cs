@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 
 namespace TypescriptT4
 {
-    public class TsClassInfo
+    public class TsTypeInfo
     {
         public string Name { get; private set; }
-
         public string ModuleName { get; private set; }
+        public bool IsInterface { get; private set; }
 
         public IList<TsMethodInfo> Methods = new List<TsMethodInfo>(); 
 
-        public TsClassInfo(string name, string moduleName)
+        public TsTypeInfo(string name, string moduleName, bool isInterface)
         {
             Name = name;
             ModuleName = moduleName;
+            IsInterface = isInterface;
         }
     }
 
@@ -43,13 +43,13 @@ namespace TypescriptT4
 
     public class Bridge
     {
-        public IList<TsClassInfo> TsClasses = new List<TsClassInfo>();
+        public IList<TsTypeInfo> TsTypes = new List<TsTypeInfo>();
         public IList<TsMethodInfo> TsMethods = new List<TsMethodInfo>();
 
 
 
         private string _currentModule;
-        private TsClassInfo _currentClass;
+        private TsTypeInfo _currentType;
         private TsMethodInfo _currentMethod;
 
         public string SourceFile { get; set; }
@@ -115,17 +115,17 @@ namespace TypescriptT4
             Directory.CreateDirectory(path);
         }
 
-        public void StartClass(string className)
+        public void StartType(string typeName, bool isInterface)
         {
-            if (_currentClass != null) throw new Exception("Start class inside a class");
-            _currentClass = new TsClassInfo(className, _currentModule);
-            TsClasses.Add(_currentClass);
+            if (_currentType != null) throw new Exception("Start class inside a class");
+            _currentType = new TsTypeInfo(typeName, _currentModule, isInterface);
+            TsTypes.Add(_currentType);
         }
 
-        public void EndClass()
+        public void EndType()
         {
-            if (_currentClass == null) throw new Exception("End class while not in a class");
-            _currentClass = null;
+            if (_currentType == null) throw new Exception("End class while not in a class");
+            _currentType = null;
         }
 
         public void StartFunction (string functionName)
@@ -133,9 +133,9 @@ namespace TypescriptT4
             if (_currentMethod != null) throw new Exception("Start function inside a function");
             var method = new TsMethodInfo(functionName);
             _currentMethod = method;
-            if (_currentClass != null)
+            if (_currentType != null)
             {
-                _currentClass.Methods.Add(method);
+                _currentType.Methods.Add(method);
             }
             TsMethods.Add(method);
         }
@@ -177,7 +177,7 @@ namespace TypescriptT4
 
         public void CompileCompleted()
         {
-            if (_currentClass != null) throw new Exception("Class not closed");
+            if (_currentType != null) throw new Exception("Class not closed");
             if (_currentMethod != null) throw new Exception("Method not closed");
             if (_currentModule != null) throw new Exception("Module not closed");
         }
